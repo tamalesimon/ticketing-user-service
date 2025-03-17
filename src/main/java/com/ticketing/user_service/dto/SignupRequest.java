@@ -1,6 +1,5 @@
 package com.ticketing.user_service.dto;
 
-import com.ticketing.user_service.entity.RoleType;
 
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;

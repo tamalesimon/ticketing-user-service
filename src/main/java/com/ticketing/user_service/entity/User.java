@@ -1,14 +1,12 @@
 package com.ticketing.user_service.entity;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,11 +17,11 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(nullable = false, unique = true)
@@ -40,9 +38,7 @@ public class User implements UserDetails {
     private AccountDetails accountDetails;
 
     @OneToOne
-    @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Role roles;
 
     @Enumerated(EnumType.STRING)
@@ -57,38 +53,38 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
+    // @Override
+    // public String getUsername() {
+    // return email;
+    // }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    // @Override
+    // public boolean isAccountNonExpired() {
+    // return true;
+    // }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+    // @Override
+    // public boolean isAccountNonLocked() {
+    // return true;
+    // }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    // @Override
+    // public boolean isCredentialsNonExpired() {
+    // return true;
+    // }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    // @Override
+    // public boolean isEnabled() {
+    // return true;
+    // }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    // return List.of();
+    // }
 
-    @Override
-    public String getPassword() {
-        return hashedPassword;
-    }
+    // @Override
+    // public String getPassword() {
+    // return hashedPassword;
+    // }
 }
