@@ -1,5 +1,7 @@
 package com.ticketing.user_service.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +9,9 @@ import lombok.*;
 @Table(name = "preferences")
 @Getter
 @Setter
-public class EventPreference {
+public class EventPreference implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "preference_id")

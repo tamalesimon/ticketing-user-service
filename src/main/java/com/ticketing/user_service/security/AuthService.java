@@ -2,6 +2,7 @@ package com.ticketing.user_service.security;
 
 import java.time.Instant;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,7 +37,7 @@ public class AuthService implements UserDetailsService {
 
         final PasswordEncoder passwordEncoder;
 
-        public AuthService(UserRepository userRepository, JwtUtil jwtUtil, AuthenticationManager authenticationManager,
+        public AuthService(UserRepository userRepository, JwtUtil jwtUtil, @Lazy AuthenticationManager authenticationManager,
                         PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
                 this.userRepository = userRepository;
                 this.jwtUtil = jwtUtil;
@@ -49,9 +50,7 @@ public class AuthService implements UserDetailsService {
                 String email = request.getEmail();
                 String password = request.getPassword();
 
-                Authentication authentication = authenticationManager
-                                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
 
                 UserDetails user = loadUserByUsername(email);
                 String token = jwtUtil.generateToken(user.getUsername());

@@ -9,3 +9,7 @@ INSERT INTO roles (name) VALUES ('ATTENDEE');
 INSERT INTO roles (name) VALUES ('ORGANIZER');
 
 SELECT * FROM roles;
+
+ALTER TABLE user_roles
+ALTER COLUMN user_id TYPE UUID USING user_id::uuid;
+

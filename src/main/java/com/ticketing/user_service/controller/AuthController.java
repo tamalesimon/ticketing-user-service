@@ -21,12 +21,12 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public SigninResponse signIn(@RequestBody SigninRequest request) {
         return authService.authenticate(request);
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public SignupResponse register(@RequestBody SignupRequest request) {
         return authService.register(request);
     }
